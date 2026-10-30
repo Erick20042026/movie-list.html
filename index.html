@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MovieList</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div style="display:flex;justify-content:space-between;max-width:1000px;margin:auto;flex-wrap:wrap">
+<div>
+  <a href="index.html">Home</a> | 
+  <a href="design.html">Design</a> | 
+  <a href="contact.html">Contact</a>
+</div>
+<div><span id="welcome"></span> | 
+  <a href="#" onclick="logout()">Logout</a></div>
+</div>
+
+<script>
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+if(!currentUser){window.location.href="signup.html";}
+function logout(){localStorage.removeItem("currentUser");window.location.href="login.html";}
+</script>
+
+<h1>🎬 MovieList</h1>
+<p id="welcomeText"></p>
+
+<div class="stats">
+<p>Total: <span id="total">0</span></p>
+<p>Watched: <span id="watchedCount">0</span></p>
+<p>Average: <span id="avgRating">0</span></p>
+</div>
+
+<h2>Add Movie</h2>
+<form id="movieForm">
+<input type="text" id="title" placeholder="Title e.g Avengers" required>
+<input type="text" id="genre" placeholder="Genre e.g Action" required>
+<input type="number" id="year" placeholder="Year e.g 2024" required>
+<input type="number" id="rating" min="1" max="10" placeholder="Rating 1-10" required>
+<input type="text" id="image" placeholder="Image link (optional)">
+<select id="status"><option value="Watched">Watched</option><option value="To Watch">To Watch</option></select>
+<button type="submit">Add Movie</button>
+</form>
+
+<h2>My Movies (10 movies with pictures)</h2>
+<input type="text" id="search" placeholder="Search...">
+<select id="filter"><option value="All">All</option><option value="Watched">Watched</option><option value="To Watch">To Watch</option></select>
+<div id="movieList" class="movie-grid"></div>
+
+<script src="index.js"></script>
+<script>document.getElementById("welcome").textContent="Hi, "+currentUser.name; document.getElementById("welcomeText").textContent="Welcome "+currentUser.name+" - Track your movies";</script>
+</body>
+</html>
